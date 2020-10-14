@@ -5,11 +5,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 def indexView(request):
-    return render(request,'base.html')
+    return render(request,'index.html')
 
 def register(request):
-    if request.user.is_authenticated:
-        return redirect('travels:index')
+    # if request.user.is_authenticated:
+    #     return redirect('travels:index')
 
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)   #created a from with values that we filled
@@ -24,4 +24,4 @@ def register(request):
 
 @login_required
 def dashboard(request):
-    return HttpResponse("<h1>Logged In!</h1>")
+    return render(request, 'dashboard.html')

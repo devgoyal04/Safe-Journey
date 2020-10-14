@@ -7,4 +7,9 @@ class UserRegisterForm(UserCreationForm):
     
     class Meta: #it shows which model to interact with when we do form.save() in views.py it saves in User model and fields show in which order to be displayed on form
         model = User
-        fields = ['username','email','password1','password2'] 
+        fields = [
+            'username',
+            'email',
+            'password1',
+            'password2'
+        ] 

@@ -1,16 +1,9 @@
+{% extends 'base.html' %}
 {% load crispy_forms_tags %}
-{% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
+{% block content %}
 
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-  </head>
-
-  <body>
-
-    <div class="content-section">
+    {% comment %} <div class="content-section">
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
@@ -26,8 +19,47 @@
                 Already have an account? <a class="ml-2" href="{% url 'travels:login' %}">Sign In</a>
             </small>
         </div>
-    </div>
-    
-</body>
+    </div> {% endcomment %}
 
-</html>
+    <div class="login-box">
+        <h2>Register</h2>
+        <form method = "POST">
+            {% csrf_token %}
+            <div class="user-box">
+                {{ form.username }}
+                {{ form.username.errors }}
+                <label>Username</label>
+            </div>
+            <div class="user-box">
+                {{ form.email }}
+                {{ form.email.errors }}                
+                <label>Email</label>
+            </div>
+            <div class="user-box">
+                {{ form.password1 }}
+                {{ form.password1.errors }}                
+                <label>Password</label>
+            </div>
+            <div class="user-box">
+                {{ form.password2 }}
+                {{ form.password2.errors }}                
+                <label>Confirm Password</label>
+            </div>
+            <a href="{% url 'travels:index' %}">
+                Back
+            </a>
+            <button id = "submit-button" type = "submit" style="float: right;">
+                Register
+            </button>
+        </form>
+        <div class = "mt-4">
+            <small class="text-muted">
+                Already have an account? <a class="ml-2" href="{% url 'travels:login' %}" style = "color: white;">Sign In</a>
+            </small>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+ 
