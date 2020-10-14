@@ -1,27 +1,6 @@
 {% extends 'base.html' %}
-{% load crispy_forms_tags %}
 
 {% block content %}
-
-    {% comment %} <div class="content-section">
-        <form method="POST"> {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Log In</legend>
-                {{ form.as_p }} 
-            </fieldset>            
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Login</button>
-            </div>
-        </form>
-
-        <div class="border-top pt-3">
-            <small class="text-muted">
-                Need an account? <a class="ml-2" href="{% url 'travels:register' %}">Sign Up Now</a>
-            </small>
-        </div>
-
-    </div> {% endcomment %}
-
     <div class="login-box">
         <h2>Login</h2>
         <form method = "POST">
@@ -34,6 +13,13 @@
                 <input type="password" name="password" required="" readonly onfocus="this.removeAttribute('readonly');"/>
                 <label>Password</label>
             </div>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{message.tags}}" id="msg" role="alert">
+                        {{message}}
+                    </div>
+                {% endfor %}
+            {% endif %}
             <a href="{% url 'travels:index' %}">
                 Back
             </a>
