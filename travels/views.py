@@ -7,12 +7,11 @@ from django.http import HttpResponseRedirect
 from django.contrib import messages
 
 def indexView(request):
+    # if request.user.is_authenticated:
+    #     return redirect('travels:dashboard')
     return render(request,'index.html')
 
 def register(request):
-    # if request.user.is_authenticated:
-    #     return redirect('travels:index')
-
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)   #created a from with values that we filled
         if form.is_valid():

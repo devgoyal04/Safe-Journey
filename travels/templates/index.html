@@ -1,7 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    {% if user.is_authenticated %}
 
-    <a class="btn btn-outline-light btn-lg mr-1" href = "{% url 'travels:login' %}" role = "button"> Login </a>
+        <a class="btn btn-outline-light btn-lg mr-1" href = "{% url 'travels:dashboard' %}" role = "button"> Go to Dashboard </a>
+
+    {% else %}
+
+        <a class="btn btn-outline-light btn-lg mr-1" href = "{% url 'travels:login' %}" role = "button"> Login </a>
+    
+    {% endif %}
 
 {% endblock content %}
