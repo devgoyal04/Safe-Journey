@@ -1,0 +1,33 @@
+{% load crispy_forms_tags %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  </head>
+
+  <body>
+
+    <div class="content-section">
+      <form method="POST">
+          {% csrf_token %}
+          <fieldset class="form-group">
+              <legend class="border-bottom mb-4">Log In</legend>
+              {{ form|crispy }} 
+          </fieldset>
+          <div class="form-group">
+              <button class="btn btn-outline-info" type="submit">Login</button>
+          </div>
+      </form>
+      <div class="border-top pt-3">
+          <small class="text-muted">
+              Need an account? <a class="ml-2" href="{% url 'travels:register' %}">Sign Up Now</a>
+          </small>
+      </div>
+  </div>
+    
+</body>
+
+</html>
