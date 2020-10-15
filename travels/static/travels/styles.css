@@ -114,3 +114,8 @@ html {
                 0 0 5px #03e9f4,
                 0 0 5px #03e9f4;
   }
+
+  ul {
+      color: #ffffff;
+      list-style-type: none;
+  }
