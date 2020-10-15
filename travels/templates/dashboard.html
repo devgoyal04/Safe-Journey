@@ -2,7 +2,17 @@
 
 {% block content %}
 
-    <a class="btn btn-outline-light btn-lg mr-1" role="button" href = "{% url 'travels:logout' %}"> Logout </a>
-    
+    <style>
+        p{
+            color: white;
+        }
+    </style>
 
+    <a class="btn btn-outline-light btn-lg mr-1" role="button" href = "{% url 'travels:logout' %}"> Logout </a>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type = "submit">Submit</button>
+    </form>
+    
 {% endblock content %}

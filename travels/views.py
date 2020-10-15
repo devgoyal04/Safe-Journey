@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from .forms import UserRegisterForm
+from .forms import UserRegisterForm,SrcDestForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login
 from django.http import HttpResponseRedirect
@@ -39,6 +39,11 @@ def loginView(request):
     
     return render(request, 'login.html')
 
+
 @login_required
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    if request.method == 'POST':
+        print(request.POST.get('date'))
+    form = SrcDestForm()
+
+    return render(request, 'dashboard.html',{'form':form})
