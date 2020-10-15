@@ -1,0 +1,29 @@
+{% extends 'base.html' %} 
+
+{% block navbar %}
+
+    {% include 'navbar.html' %}
+
+{% endblock navbar %}
+
+{% block content %}
+
+    <style>
+        h1{
+            color: white;
+        }
+    </style>
+
+    {% if history %}
+    
+        <h1> Some tickets are booked </h1>
+    
+    {% else %}
+
+        <h1> No Tickets Booked!
+
+    {% endif %}
+
+{% endblock content %}
+
+

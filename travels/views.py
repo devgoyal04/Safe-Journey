@@ -5,9 +5,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login
 from django.http import HttpResponseRedirect
 from django.contrib import messages
-from datetime import datetime
 from django.contrib.auth.models import User
-from .safeApi import get_available_seats, book_ticket
+
+from datetime import datetime
+
+from .safeApi import get_available_seats, book_ticket, get_history
 
 def indexView(request):
     # if request.user.is_authenticated:
@@ -98,39 +100,47 @@ def bookingDetails(request, src,dest,train,date):
             email = request.POST.get('email')
             phone = request.POST.get('phone')
             finalDest = request.POST.get('finalDest')
-            formDetails = [
-                {
-                    'name' : passenger1,
-                    'age' : age1,
-                    'email' : email,
-                    'contact': phone,
-                    'final_des' : finalDest,
-                    'userId' : request.user.username
-                }
-            ]
+
+            formDetails = [{
+                'name': passenger1,
+                'age': age1,
+                'email': email,
+                'contact': phone,
+                'final_des': finalDest,
+                'userId': request.user.username
+            }]
+
             if passenger2:
                 dict2 = {
-                    'name' : passenger2,
-                    'age' : age2,
-                    'email' : email,
+                    'name': passenger2,
+                    'age': age2,
+                    'email': email,
                     'contact': phone,
-                    'final_des' : finalDest,
-                    'userId' : request.user.username
+                    'final_des': finalDest,
+                    'userId': request.user.username
                 }
                 formDetails.append(dict2)
 
             if passenger3:
                 dict3 = {
-                    'name' : passenger3,
-                    'age' : age3,
-                    'email' : email,
+                    'name': passenger3,
+                    'age': age3,
+                    'email': email,
                     'contact': phone,
-                    'final_des' : finalDest,
-                    'userId' : request.user.username
+                    'final_des': finalDest,
+                    'userId': request.user.username
                 }
-                formDetails.append(dict3)     
-            ticket = book_ticket(src,dest,train,date,formDetails)
+                formDetails.append(dict3) 
+
+            ticket = book_ticket(src, dest, train, date, formDetails)
             print(ticket)       
 
     form = BookingForm()
-    return render(request, 'detail.html', {'form':form})  
+    return render(request, 'detail.html', {'form': form})  
+
+@login_required
+def bookingHistory(request):
+    history = get_history(request.user.username)
+    print(history)
+
+    return render(request, 'history.html', {'history': history})

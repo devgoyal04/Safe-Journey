@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from django.contrib.auth.views import LogoutView
-from .views import indexView, dashboard, register, loginView, booking, bookingDetails
+from .views import indexView, dashboard, register, loginView, booking, bookingDetails, bookingHistory
 
 app_name = 'travels'
 
@@ -9,6 +9,7 @@ urlpatterns = [
     path('', indexView, name = 'index'),
     path('register/',register, name='register'),
     path('dashboard/', dashboard, name = 'dashboard'),
+    path('history/', bookingHistory, name = "bookingHistory"),
     path('booking/<src>/<dest>/<date>', booking, name = 'booking'),
     path('details/<src>/<dest>/<train>/<date>', bookingDetails, name = 'bookingDetails'),
     path('login/', loginView, name='login'),
