@@ -43,7 +43,11 @@ def loginView(request):
 @login_required
 def dashboard(request):
     if request.method == 'POST':
-        print(request.POST.get('date'))
+        src = request.POST.get('source')
+        dest = request.POST.get('destination')
+        if src==dest:
+            messages.info(request, 'Source and Destination cannot be same!')
+            return redirect('travels:dashboard')
     form = SrcDestForm()
 
     return render(request, 'dashboard.html',{'form':form})

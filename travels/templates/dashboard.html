@@ -13,6 +13,13 @@
         {% csrf_token %}
         {{ form.as_p }}
         <button type = "submit">Submit</button>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{message.tags}}" id="msg" role="alert">
+                    {{message}}
+                </div>
+            {% endfor %}
+        {% endif %}
     </form>
     
 {% endblock content %}
