@@ -2,7 +2,9 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 import os
-
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText 
 BASE_DIR = os.getcwd()
 
 # Firebase Cursor connector
@@ -52,10 +54,12 @@ def book_ticket(src, des, train, date, details):
 	all_seats = doc_ref.get()
 	
 	seats = all_seats.to_dict()
+	allotment = []
+	booked_details = []
 	for pass_info in details:
 		for comp in seats.keys():
 			fin_no = seats[comp]
-			if fin_no != 89:				# Final seat will be 88 as we start of with seat number 1  and we have 30 seats.
+			if fin_no != 89:				# Final seat will be 89 as we start of with seat number 2  and we have 30 seats.
 				seat_no = fin_no + 3		# Vicinty of +-2 
 				doc_ref.collection(comp).document(str(seat_no)).set(pass_info)
 				pass_info['compartment'] = comp
@@ -65,8 +69,13 @@ def book_ticket(src, des, train, date, details):
 				pass_info['des'] = des
 				pass_info['train'] = train
 				his_ref.document().set(pass_info)
-				return comp, seat_no
-	return None
+				booked_details.append(pass_info)
+				allotment.append({
+					"comp" : comp,
+					"seat" : seat_no
+				})
+	send_mail(booked_details)
+	return allotment
 
 # Gives information about persorns booking history based on his/her userId.
 def get_history(userid):
@@ -77,3 +86,26 @@ def get_history(userid):
 		history.append(info.to_dict())
 	return history
 
+def send_mail(details):
+    sender = "journeysafe148@gmail.com"
+    receiver = details[0]['email']
+    smtp = smtplib.SMTP('smtp.gmail.com', 587)
+    smtp.starttls()
+    smtp.login(sender, "safejourney123")
+    train_name = details[0]['train']
+    body  = "Thank You for choosing Safe Journey! Hope you are loving this experience.\n Your booking has been confirmed with train " + train_name + "\n Here is your passenger information.\n"
+    count = 1
+    for info in details:
+        text = str(count) + ". Passenger Name: " + info['name'] + "\nCompartment No.: " + info['compartment'] + "\nSeat No.: " + str(info['seat']) + "\n"
+        body+=text
+        count+=1
+
+    message = MIMEMultipart()
+    message['Subject'] = "Booking Confirmed!"
+    message['From'] = sender
+    message["To"] = receiver
+    message.attach(MIMEText(body, 'plain'))
+
+    smtp.sendmail(sender,receiver,message.as_string())
+#journeysafe148@gmail.com
+#safejourney123
