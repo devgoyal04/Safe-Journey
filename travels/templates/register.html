@@ -2,6 +2,14 @@
 
 {% block content %}
 
+    <style>
+        .errorlist{
+            list-style-type:none ;
+            color: red;
+            padding: 0;
+        }
+    </style>
+
     <div class="login-box">
         <h2>Register</h2>
         <form method = "POST">
@@ -35,7 +43,7 @@
         </form>
         <div class = "mt-4">
             <small class="text-muted">
-                Already have an account? <a class="ml-2" href="{% url 'travels:login' %}" style = "color: white;">Sign In</a>
+                Already have an account? <a href="{% url 'travels:login' %}" style = "color: white; padding: 4px 10px 4px 10px; text-decoration: none; border-radius: 15px">Sign In</a>
             </small>
         </div>
     </div>
