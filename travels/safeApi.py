@@ -5,7 +5,6 @@ import os
 
 BASE_DIR = os.getcwd()
 
-
 # Firebase Cursor connector
 # Place cred.json in static folder at the place where manage.py is.
 def my_cursor():
@@ -61,11 +60,13 @@ def book_ticket(src, des, train, date, details):
 				doc_ref.collection(comp).document(str(seat_no)).set(pass_info)
 				pass_info['compartment'] = comp
 				pass_info['seat'] = seat_no
+				pass_info['date'] = date
+				pass_info['src'] = src
+				pass_info['des'] = des
+				pass_info['train'] = train
 				his_ref.document().set(pass_info)
 				return comp, seat_no
-		
 	return None
-
 
 # Gives information about persorns booking history based on his/her userId.
 def get_history(userid):
@@ -75,5 +76,4 @@ def get_history(userid):
 	for info in his_ref:
 		history.append(info.to_dict())
 	return history
-
 
