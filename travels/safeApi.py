@@ -68,7 +68,7 @@ def book_ticket(src, des, train, date, details):
 				pass_info['src'] = src
 				pass_info['des'] = des
 				pass_info['train'] = train
-				his_ref.document().set(pass_info)
+				#his_ref.document().set(pass_info)
 				booked_details.append(pass_info)
 				allotment.append({
 					"comp" : comp,
@@ -77,7 +77,19 @@ def book_ticket(src, des, train, date, details):
 				seats[comp] = seat_no
 				doc_ref.set(seats)
 				break
-			
+	total_seats = len(details)
+	if (total_seats>0):
+		passenger = {
+			'date' : date,
+			'total_tickets': total_seats,
+			"src": src,
+			'des': des,
+			'train': train
+		}
+		his_ref.document().set(passenger)
+	else:
+		pass
+
 	send_mail(booked_details)
 	return allotment
 
