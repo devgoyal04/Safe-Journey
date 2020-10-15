@@ -13,7 +13,7 @@ def my_cursor():
 	try:
 		firebase_admin.get_app()
 	except ValueError as e:
-		cred = credentials.Certificate(os.path.join(BASE_DIR, "static", "cred.json"))
+		cred = credentials.Certificate(os.path.join(BASE_DIR, "static", "travel", "cred.json"))
 		firebase_admin.initialize_app(cred)
 	
 	db = firestore.client()
