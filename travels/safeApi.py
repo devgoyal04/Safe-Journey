@@ -36,10 +36,12 @@ def get_available_seats(src, des, train, date):
 # If that src and des are not ever travelled, it make a new entry
 # Return compartment number and seat number if booking is confirmed
 # Else it return None.
-def book_ticket(src, des, train, details):
+def book_ticket(src, des, train, date, details):
 	db = my_cursor()
+	userId = details['userId']
 	#doc_ref = db.collection("train").document(src).collection(train).document(src)
 	doc_ref = db.collection("trains").document("users").collection(src).document(train).collection(des).document(str(date))
+	his_ref = db.collection("history").document("userid").collection(userId)
 	all_seats = doc_ref.get()
 	
 	if not all_seats.exists:		# Making default if not travelled.
@@ -57,9 +59,21 @@ def book_ticket(src, des, train, details):
 			if fin_no != 89:				# Final seat will be 88 as we start of with seat number 1  and we have 30 seats.
 				seat_no = fin_no + 3		# Vicinty of +-2 
 				doc_ref.collection(comp).document(str(seat_no)).set(pass_info)
+				pass_info['compartment'] = comp
+				pass_info['seat'] = seat_no
+				his_ref.document().set(pass_info)
 				return comp, seat_no
 		
 	return None
 
+
+# Gives information about persorns booking history based on his/her userId.
 def get_history(userid):
-	
+	history = []
+	db = my_cursor()
+	his_ref = db.collection("history").document("userid").collection(userid).stream()
+	for info in his_ref:
+		history.append(info.to_dict())
+	return history
+
+
