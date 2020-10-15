@@ -39,12 +39,12 @@ def get_available_seats(src, des, train, date):
 # Else it return None.
 def book_ticket(src, des, train, date, details):
 	db = my_cursor()
-	userId = details['userId']
+	userId = details[0]['userId']
 	#doc_ref = db.collection("train").document(src).collection(train).document(src)
-	doc_ref = db.collection("trains").document("users").collection(src).document(train).collection(des).document(str(date))
-	his_ref = db.collection("history").document("userid").collection(userId)
+	doc_ref = db.collection("trains").document("users").collection(str(src)).document(str(train)).collection(str(des)).document(str(date))
+	his_ref = db.collection("history").document("userid").collection(str(userId))
 	all_seats = doc_ref.get()
-	
+
 	if not all_seats.exists:		# Making default if not travelled.
 		doc_ref.set({
 			"AC1": -1,
@@ -52,14 +52,14 @@ def book_ticket(src, des, train, date, details):
 			"AC3": -1
 		})
 	all_seats = doc_ref.get()
-	
-	seats = all_seats.to_dict()
+
+	seats = all_seats.to_dict() # AC1 AC2 AC3
 	allotment = []
 	booked_details = []
 	for pass_info in details:
 		for comp in seats.keys():
 			fin_no = seats[comp]
-			if fin_no != 89:				# Final seat will be 89 as we start of with seat number 2  and we have 30 seats.
+			if fin_no != 89:			# Final seat will be 89 as we start of with seat number 2  and we have 30 seats.
 				seat_no = fin_no + 3		# Vicinty of +-2 
 				doc_ref.collection(comp).document(str(seat_no)).set(pass_info)
 				pass_info['compartment'] = comp
@@ -74,6 +74,10 @@ def book_ticket(src, des, train, date, details):
 					"comp" : comp,
 					"seat" : seat_no
 				})
+				seats[comp] = seat_no
+				doc_ref.set(seats)
+				break
+			
 	send_mail(booked_details)
 	return allotment
 
