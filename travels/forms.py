@@ -15,6 +15,18 @@ class UserRegisterForm(UserCreationForm):
         ] 
 
 class SrcDestForm(forms.Form):
-    source = forms.ChoiceField(choices=[('delhi','Delhi'),('mumbai','Mumbai'),('jaipur','Jaipur'),('kolkata','Kolkata'),('hyderabad','Hyderabad')])
-    destination = forms.ChoiceField(choices=[('delhi','Delhi'),('mumbai','Mumbai'),('jaipur','Jaipur'),('kolkata','Kolkata'),('hyderabad','Hyderabad')])
-    date = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}))
+    source = forms.ChoiceField(choices = [
+        ('delhi','Delhi'),
+        ('mumbai','Mumbai'),
+        ('jaipur','Jaipur'),
+        ('kolkata','Kolkata'),
+        ('hyderabad','Hyderabad')
+    ])
+    destination = forms.ChoiceField(choices = [
+        ('delhi','Delhi'),
+        ('mumbai','Mumbai'),
+        ('jaipur','Jaipur'),
+        ('kolkata','Kolkata'),
+        ('hyderabad','Hyderabad')
+    ])
+    date = forms.DateField(widget = forms.widgets.DateInput(attrs = {'type': 'date'}))

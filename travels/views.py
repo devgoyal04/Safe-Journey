@@ -6,6 +6,8 @@ from django.contrib.auth import authenticate,login
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 
+from .safeApi import get_available_seats
+
 def indexView(request):
     # if request.user.is_authenticated:
     #     return redirect('travels:dashboard')
@@ -45,9 +47,26 @@ def dashboard(request):
     if request.method == 'POST':
         src = request.POST.get('source')
         dest = request.POST.get('destination')
+        date = request.POST.get('date')
+        
         if src==dest:
             messages.info(request, 'Source and Destination cannot be same!')
             return redirect('travels:dashboard')
+
+        return redirect('travels:booking', src=src, dest=dest, date=date)
     form = SrcDestForm()
 
-    return render(request, 'dashboard.html',{'form':form})
+    return render(request, 'dashboard.html', {'form':form})
+
+@login_required
+def booking(request, src, dest, date):
+    seatsA = get_available_seats(src, dest, src+'-'+dest+'-Express', date)
+    seatsB = get_available_seats(src, dest, src+'-'+dest+'-Superfast', date)
+    seatsC = get_available_seats(src, dest, src+'-'+dest+'-GaribRath', date)
+
+    context = {
+        'src': src,
+        'dest': dest,
+        'date': date,
+    }
+    return render(request, 'booking.html', context)
