@@ -13,3 +13,8 @@ class UserRegisterForm(UserCreationForm):
             'password1',
             'password2'
         ] 
+
+class SrcDestForm(forms.Form):
+    source = forms.CharField()
+    destination = forms.CharField()
+    date = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}))
