@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block navbar %}
+
+    {% include 'navbar.html' %}
+
+{% endblock navbar %}
+
+{% block content %}
+
+    <style>
+        th,td,caption{
+            color: white;
+        }
+        .table{
+            width: 750px; 
+	        border-collapse: collapse; 
+	        margin:50px auto;
+        }
+        table caption {
+            font-size: 1.5em;
+            margin: .5em 0 .75em;
+            text-align: center;
+        }
+    </style>
+
+    <table class="table table-bordered table-hover">
+        <caption style="caption-side:top">Trains from {{ src }} to {{ dest }} on {{ date }}</caption>
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Train Name</th>
+            <th>Available Seats</th>
+            <th>Book Tickets</th>
+        </tr>
+        </thead>
+        <tbody>    
+        <tr>
+            <th scope="row">1</th>
+            <td>{{ trainA }}</td>
+            <td>{{ seatsA }}</td>
+            <td><a href="{% url 'travels:bookingDetails' src dest trainA date %}">Book Now!</a></td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>{{ trainB }}</td>
+            <td>{{ seatsB }}</td>
+            <td><a href="{% url 'travels:bookingDetails' src dest trainB date %}">Book Now!</a></td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>{{ trainC }}</td>
+            <td>{{ seatsC }}</td>
+            <td><a href="{% url 'travels:bookingDetails' src dest trainC date %}">Book Now!</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+{% endblock content %}

@@ -14,7 +14,33 @@ class UserRegisterForm(UserCreationForm):
             'password2'
         ] 
 
+    def __str__(self):
+        return self.username    
+
 class SrcDestForm(forms.Form):
-    source = forms.ChoiceField(choices=[('delhi','Delhi'),('mumbai','Mumbai'),('jaipur','Jaipur'),('kolkata','Kolkata'),('hyderabad','Hyderabad')])
-    destination = forms.ChoiceField(choices=[('delhi','Delhi'),('mumbai','Mumbai'),('jaipur','Jaipur'),('kolkata','Kolkata'),('hyderabad','Hyderabad')])
-    date = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}))
+    source = forms.ChoiceField(choices = [
+        ('Delhi','Delhi'),
+        ('Mumbai','Mumbai'),
+        ('Jaipur','Jaipur'),
+        ('Kolkata','Kolkata'),
+        ('Hyderabad','Hyderabad')
+    ])
+    destination = forms.ChoiceField(choices = [
+        ('Delhi','Delhi'),
+        ('Mumbai','Mumbai'),
+        ('Jaipur','Jaipur'),
+        ('Kolkata','Kolkata'),
+        ('Hyderabad','Hyderabad')
+    ])
+    date = forms.DateField(widget = forms.widgets.DateInput(attrs = {'type': 'date'}))
+
+class BookingForm(forms.Form):
+    passenger1 = forms.CharField(required=True)
+    age1 = forms.IntegerField(required=True)
+    passenger2 = forms.CharField(required=False)
+    age2 = forms.CharField(required=False)
+    passenger3 = forms.CharField(required=False)
+    age3 = forms.CharField(required=False)
+    phone = forms.RegexField(regex=r'^\+?1?\d{9,15}$', error_messages={"invalid": "Enter a valid number"},required=True)
+    email = forms.EmailField(required=True)   
+    finalDest = forms.CharField(required=True)
