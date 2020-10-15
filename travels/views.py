@@ -140,7 +140,7 @@ def bookingDetails(request, src,dest,train,date):
 
 @login_required
 def bookingHistory(request):
-    history = get_history(request.user.username)
-    print(history)
+    histories = get_history(request.user.username)
+    print(histories)
 
-    return render(request, 'history.html', {'history': history})
+    return render(request, 'history.html', {'histories': histories})
