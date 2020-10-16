@@ -133,7 +133,6 @@ def bookingDetails(request, src,dest,train,date):
                 formDetails.append(dict3) 
 
             ticket = book_ticket(src, dest, train, date, formDetails)
-            print(ticket)       
 
     form = BookingForm()
     return render(request, 'detail.html', {'form': form})  
@@ -141,6 +140,5 @@ def bookingDetails(request, src,dest,train,date):
 @login_required
 def bookingHistory(request):
     histories = get_history(request.user.username)
-    print(histories)
 
     return render(request, 'history.html', {'histories': histories})

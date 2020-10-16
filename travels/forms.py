@@ -24,7 +24,10 @@ class SrcDestForm(forms.Form):
         ('Jaipur','Jaipur'),
         ('Kolkata','Kolkata'),
         ('Hyderabad','Hyderabad')
-    ])
+    ], widget = forms.Select(attrs = {
+        'class': 'bootstrap-select'
+    }))
+
     destination = forms.ChoiceField(choices = [
         ('Delhi','Delhi'),
         ('Mumbai','Mumbai'),
