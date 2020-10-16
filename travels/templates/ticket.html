@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block navbar %}
+
+    {% include 'navbar.html' %}
+
+{% endblock navbar %}
+
+{% block content %}
+
+    <style>
+        th,td,caption{
+            color: white;
+        }
+        .table{
+            width: 750px; 
+	        border-collapse: collapse; 
+	        margin:50px auto;
+        }
+        table caption {
+            font-size: 1.5em;
+            margin: .5em 0 .75em;
+            text-align: center;
+        }
+        .button {
+            display: block;
+            width: 115px;
+            background: #4E9CAF;
+            padding: 7px;
+            text-align: center;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            line-height: 25px;
+        }
+        a:hover {
+            color: blue;
+        }
+
+    </style>
+
+    <table class="table table-bordered table-hover">
+        <caption style="caption-side:top">{{user.username}}, Your booking has been confirmed in {{ train }} from {{ src }} to {{ dest }} on {{ date }}</caption>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Compartment</th>
+                <th>Seat Number</th>
+            </tr>
+        </thead>
+        <tbody>    
+            {% for ticket in tickets %}
+            
+                <tr>
+                    <td> {{ ticket.name }} </td>
+                    <td> {{ ticket.age }} </td>
+                    <td> {{ ticket.comp }} </td>
+                    <td> {{ ticket.seat }} </td>
+                </tr>
+            
+            {% endfor %}
+        </tbody>
+        <caption> Please wear mask and maintain social distancing </caption>
+        <caption> Safe Journey! &#128512 </caption>
+    </table>
+
+{% endblock content %}

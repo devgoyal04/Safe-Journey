@@ -132,8 +132,13 @@ def bookingDetails(request, src,dest,train,date):
                 }
                 formDetails.append(dict3) 
 
-            ticket = book_ticket(src, dest, train, date, formDetails)
+            tickets = book_ticket(src, dest, train, date, formDetails)
+            for i in range(len(tickets)):
+                tickets[i]['name'] = formDetails[i]['name']
+                tickets[i]['age'] = formDetails[i]['age']
 
+            request.session['ticket'] = tickets
+            return redirect("travels:ticket", src = src, dest = dest, train = train, date = date) 
     form = BookingForm()
     return render(request, 'detail.html', {'form': form})  
 
@@ -142,3 +147,15 @@ def bookingHistory(request):
     histories = get_history(request.user.username)
 
     return render(request, 'history.html', {'histories': histories})
+
+@login_required
+def ticket(request, src, dest, train, date):
+    context = {
+        'tickets': request.session['ticket'],
+        'src': src,
+        'dest': dest,
+        'train': train,
+        'date': date
+    }
+    return render(request, 'ticket.html', context)
+
