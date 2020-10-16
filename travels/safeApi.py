@@ -5,8 +5,10 @@ import os
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText 
+
 BASE_DIR = os.getcwd()
 
+from .config import EMAIL, PASSWORD
 # Firebase Cursor connector
 # Place cred.json in static folder at the place where manage.py is.
 def my_cursor():
@@ -97,17 +99,17 @@ def book_ticket(src, des, train, date, details):
 def get_history(userid):
 	history = []
 	db = my_cursor()
-	his_ref = db.collection("history").document("userid").collection(userid).stream()
+	his_ref = db.collection("history").document("userid").collection(str(userid)).stream()
 	for info in his_ref:
 		history.append(info.to_dict())
 	return history
 
 def send_mail(details):
-    sender = "journeysafe148@gmail.com"
+    sender = EMAIL
     receiver = details[0]['email']
     smtp = smtplib.SMTP('smtp.gmail.com', 587)
     smtp.starttls()
-    smtp.login(sender, "safejourney123")
+    smtp.login(sender, PASSWORD)
     train_name = details[0]['train']
     body  = "Thank You for choosing Safe Journey! Hope you are loving this experience.\n Your booking has been confirmed with train " + train_name + "\n Here is your passenger information.\n"
     count = 1
@@ -123,5 +125,3 @@ def send_mail(details):
     message.attach(MIMEText(body, 'plain'))
 
     smtp.sendmail(sender,receiver,message.as_string())
-#journeysafe148@gmail.com
-#safejourney123
