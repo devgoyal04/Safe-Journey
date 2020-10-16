@@ -24,9 +24,7 @@ class SrcDestForm(forms.Form):
         ('Jaipur','Jaipur'),
         ('Kolkata','Kolkata'),
         ('Hyderabad','Hyderabad')
-    ], widget = forms.Select(attrs = {
-        'class': 'bootstrap-select'
-    }))
+    ],widget=forms.Select(attrs={'class':'form-control'}))
 
     destination = forms.ChoiceField(choices = [
         ('Delhi','Delhi'),
@@ -34,8 +32,9 @@ class SrcDestForm(forms.Form):
         ('Jaipur','Jaipur'),
         ('Kolkata','Kolkata'),
         ('Hyderabad','Hyderabad')
-    ])
-    date = forms.DateField(widget = forms.widgets.DateInput(attrs = {'type': 'date'}))
+    ],widget=forms.Select(attrs={'class':'form-control'}))
+    date = forms.DateField(widget = forms.widgets.DateInput(attrs = {'type': 'date','class':'form-control'}))
+
 
 class BookingForm(forms.Form):
     passenger1 = forms.CharField(required=True)

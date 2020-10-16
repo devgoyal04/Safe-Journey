@@ -10,26 +10,47 @@
 {% block content %}
 
     <style>
-        p {
+        form {
             color: white;
         }
     </style>
 
-    <form method="POST">
-        {% csrf_token %}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Search Trains</legend>
-            {{ form|crispy }} 
-        </fieldset>
-        <button type = "submit">Search</button>
-        {% if messages %}
-            {% for message in messages %}
-                <div class="alert alert-{{message.tags}}" id="msg" role="alert">
-                    {{message}}
-                </div>
-            {% endfor %}
-        {% endif %}
-    </form>
-    
-    
+<div class="container">
+    <h1 style="color: white;text-align: center;">Search Trains</h1>
+    <div class="form-group">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <!-- <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Search Trains</legend>
+                {{ form|crispy }} 
+            </fieldset> -->
+            <button  style="margin-left: 30rem; margin-top: 35px; display: block;" type = "submit">Search</button>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{message.tags}}" id="msg" role="alert">
+                        {{message}}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </form>
+    </div>
+    <div>
+        <h1 style="color: white;text-align: center;padding-bottom: 20px;padding-top: 30px;">Guidelines for Safe Travel</h1>
+        <blockquote class="blockquote">
+            <p class="mb-0" style="color: white;">1. Only asymptomatic passengers will be allowed to board.</p>
+            <p class="mb-0" style="color: white;">2. Compulsory use of masks by all the metro passengers and staff.</p>
+            <p class="mb-0" style="color: white;">3. Heating, Ventilation, and Air-conditioning system should be used.</p>
+            <p class="mb-0" style="color: white;">4. Stations or entry and exit gates in the containment zones will remain closed.</p>
+            <p class="mb-0" style="color: white;">5. Suitable markings at the stations and inside the trains will be done to ensure social distancing.</p>
+            <p class="mb-0" style="color: white;">6. Sanitizers will be provided to all the passengers at entry points. Sanitization of all areas should be done at regular intervals.</p>
+            <p class="mb-0" style="color: white;">7. Use of Smart card and cashless/online transactions to be encouraged.</p>
+            <p class="mb-0" style="color: white;">8. Only asymptomatic passengers will be allowed to board.</p>
+            <p class="mb-0" style="color: white;">9. Adequate dwell time at stations should be provided to enable smooth boarding/deboarding ensuring social distancing.</p>
+            <p class="mb-0" style="color: white;">10. Passengers are advised to travel with minimum luggage and avoid carrying metallic items for easy and quick scanning.</p>
+        </blockquote>
+    </div>
+</div>
+
 {% endblock content %}
+
