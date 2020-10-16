@@ -12,8 +12,6 @@ from datetime import datetime
 from .safeApi import get_available_seats, book_ticket, get_history
 
 def indexView(request):
-    # if request.user.is_authenticated:
-    #     return redirect('travels:dashboard')
     return render(request,'index.html')
 
 def register(request):
@@ -61,8 +59,8 @@ def dashboard(request):
             return redirect('travels:dashboard')            
 
         return redirect('travels:booking', src=src, dest=dest, date=date)
-    form = SrcDestForm()
 
+    form = SrcDestForm()
     return render(request, 'dashboard.html', {'form':form})
 
 @login_required
@@ -139,13 +137,13 @@ def bookingDetails(request, src,dest,train,date):
 
             request.session['ticket'] = tickets
             return redirect("travels:ticket", src = src, dest = dest, train = train, date = date) 
+
     form = BookingForm()
     return render(request, 'detail.html', {'form': form})  
 
 @login_required
 def bookingHistory(request):
     histories = get_history(request.user.username)
-
     return render(request, 'history.html', {'histories': histories})
 
 @login_required
