@@ -13,7 +13,7 @@ This proposed solution also follows the government guidelines that only 33% peop
 ### Tech Stack
 ```
 - Programming Languages
-    - Python 3.6
+    - Python 3.8
 - Frameworks
     - Django 3.1.2
 - Database
@@ -49,9 +49,6 @@ python3 manage.py migrate
 ```
 python3 mangae.py runserver
 ```
-
-### Deployment
-The site is live and running at 
 
 ### Database Structure and Schema
 As Google Firebase is used as database for this app, the database is divided into documents and collections.
@@ -112,35 +109,40 @@ For every PNR the Schema is defined as follows
 ```
 ## Workflow
 
-**Landing Page**
-* Browse to the url [http://dhruvgupta.pythonanywhere.com/](http://dhruvgupta.pythonanywhere.com/) to see the landing page.
-![Landing Page](images/1.png "Landing Page")
+**Home Page**
+* Home page of our website.
+![Home Page](images/1.png "Home Page")
 
 **Login Page**
-* Clicking on Login with Twitter Button will take you to Twitter's Authorization Page.
 ![Login Page](images/2.png "Login Page")
 > Login Page
 
-**Twitter's Authorization Page**
-![Twitter Login](images/3.png "Twitter Login")
-> Twitter Login
-
-![Authorization](images/4.png "Authorization")
-> Authorization
+**Register Page**
+![Register PAge](images/3.png "Register Login")
+> Register if you are a new user
 
 **Dashboard**
-* This page contains all the tweets of User's Timeline of past 7 days. It also shows stats such as Top domains shared and Top users that have shared most links.
+* This page contains the government guidelines regarding pandemic and allows to search trains between source city to destination city on a given date. 
 ![Dashboard Page](images/5.png "Dashboard Page")
 > Dashboard Page View
 
-![Tweets](images/6.png "Tweets")
 
-**Responsive Mobile View**
+**Available Trains**
+* This page shows all the trains available along with fare, time and total available seats. 
 
-![Mobile View ](images/7.jpeg "Mobile View")
-> Mobile View
+> Avaiable tickets view
 
-![Mobile View](images/8.jpeg "Mobile View")
+**Booking Details**
+* This page contains form to be filled by user for booking tickets.
 
-![Login page ](images/9.png "Login page")
-> Login page when user still logged in
+> Booking details view
+
+**View booked ticket**
+* After successful booking of ticket, user will view the booked ticket.
+
+> View booked ticket
+
+**Booking History**
+* All tickets booked by user will be shown.
+
+> Booking History Page View
