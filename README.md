@@ -111,38 +111,38 @@ For every PNR the Schema is defined as follows
 
 **Home Page**
 * Home page of our website.
-![Home Page](images/1.png "Home Page")
+![Home Page](images/landing.png "Home Page")
 
 **Login Page**
-![Login Page](images/2.png "Login Page")
+![Login Page](images/login.png "Login Page")
 > Login Page
 
 **Register Page**
-![Register PAge](images/3.png "Register Login")
+![Register PAge](images/register.png "Register Page")
 > Register if you are a new user
 
 **Dashboard**
 * This page contains the government guidelines regarding pandemic and allows to search trains between source city to destination city on a given date. 
-![Dashboard Page](images/5.png "Dashboard Page")
+![Dashboard Page](images/dashboard.png "Dashboard Page")
 > Dashboard Page View
 
 
 **Available Trains**
 * This page shows all the trains available along with fare, time and total available seats. 
-
+![Available Tickets Page](images/available_trains.png "Dashboard Page")
 > Avaiable tickets view
 
 **Booking Details**
 * This page contains form to be filled by user for booking tickets.
-
+![Booking details Page](images/go_full_page.png "Dashboard Page")
 > Booking details view
 
 **View booked ticket**
 * After successful booking of ticket, user will view the booked ticket.
-
+![View booked ticket](images/booked_ticket.png "Dashboard Page")
 > View booked ticket
 
 **Booking History**
 * All tickets booked by user will be shown.
-
+![Booking History Page](images/booking_history.png "Dashboard Page")
 > Booking History Page View
