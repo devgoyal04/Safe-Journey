@@ -9,6 +9,10 @@ from email.mime.text import MIMEText
 BASE_DIR = os.getcwd()
 
 from .config import EMAIL, PASSWORD
+<<<<<<< HEAD
+=======
+
+>>>>>>> d58b42b77ce160044d62c15752d1bd33a657b948
 # Firebase Cursor connector
 # Place cred.json in static folder at the place where manage.py is.
 def my_cursor():
@@ -124,4 +128,9 @@ def send_mail(details):
     message["To"] = receiver
     message.attach(MIMEText(body, 'plain'))
 
+<<<<<<< HEAD
     smtp.sendmail(sender,receiver,message.as_string())
+=======
+    smtp.sendmail(sender,receiver,message.as_string())
+
+>>>>>>> d58b42b77ce160044d62c15752d1bd33a657b948
